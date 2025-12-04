@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Docker с Nginx</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff7e5f 0%, #feb47b 100%);            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            margin: 20px 0;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
+        }
+        
+        .status {
+            background: rgba(0, 255, 0, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #4CAF50;
+        }
+        
+        .info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .step {
+            margin: 15px 0;
+            padding-left: 20px;
+            border-left: 3px solid #667eea;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="50" fill="#0db7ed"/>
+            <path d="M60 25L85 75H35z" fill="#fff"/>
+            <circle cx="60" cy="60" r="10" fill="#0db7ed"/>
+        </svg>
+        
+        <h1>🚀 Docker + Nginx 1.0.1</h1>
+        
+        <div class="status">
+            ✅ <strong>Статус:</strong> Контейнер успешно запущен!
+        </div>
+        
+        <div class="info">
+            <h2>📋 Информация о контейнере:</h2>
+            <div class="step">
+                <strong>Образ:</strong> <code>nginx:alpine</code>
+            </div>
+            <div class="step">
+                <strong>Порт:</strong> <code>80</code> (внутри контейнера) → <code>8081</code> (на хосте)
+            </div>
+            <div class="step">
+                <strong>Рабочая директория:</strong> <code>/usr/share/nginx/html</code>
+            </div>
+            <div class="step">
+                <strong>Время запуска:</strong> <span id="timestamp"></span>
+            </div>
+            <div class="step">
+                <strong>Версия:</strong> <code>1.0.1</code>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h2>🔧 Команды для работы:</h2>
+            <div class="step"><code>docker build -t my-nginx .</code></div>
+            <div class="step"><code>docker run -d -p 8080:80 my-nginx</code></div>
+            <div class="step"><code>docker ps</code> - список контейнеров</div>
+            <div class="step"><code>docker logs [CONTAINER_ID]</code> - просмотр логов</div>
+        </div>
+        
+        <div style="margin-top: 30px; color: rgba(255, 255, 255, 0.8);">
+            <p>Страница была загружена из Docker-контейнера с Nginx</p>
+            <p>Docker делает развертывание приложений простым и предсказуемым!</p>
+        </div>
+    </div>
+
+    <script>
+        // Добавляем текущую дату и время
+        document.getElementById('timestamp').textContent = new Date().toLocaleString('ru-RU');
+        
+        // Простая анимация заголовка
+        const title = document.querySelector('h1');
+        let hue = 0;
+        
+        function animateTitle() {
+            hue = (hue + 1) % 360;
+            title.style.textShadow = `0 2px 10px hsla(${hue}, 100%, 50%, 0.5)`;
+            requestAnimationFrame(animateTitle);
+        }
+        
+        animateTitle();
+    </script>
+</body>
+</html>
